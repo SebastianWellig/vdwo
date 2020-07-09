@@ -9,7 +9,7 @@
 #include "zip.hpp"
 #include "vdwo.hpp"
 
-static OpenBabel::OBElementTable OB_elementTable;
+static OpenBabel::OBElementTable obtable;
 static const std::numeric_limits<double> double_limits;
 
 OpenBabel::vector3 min(OpenBabel::vector3 a, OpenBabel::vector3 b) {
@@ -61,9 +61,6 @@ class Sphere {
 
 class Cuboid {
     public:
-        OpenBabel::vector3 _position;
-        OpenBabel::matrix3x3 _vectors;
-        
         Cuboid(OpenBabel::vector3 position, OpenBabel::vector3 X,
                OpenBabel::vector3 Y, OpenBabel::vector3 Z) :
                _position(position), _vectors(OpenBabel::matrix3x3(X,Y,Z)) {
@@ -81,6 +78,10 @@ class Cuboid {
         OpenBabel::vector3 GetVector(unsigned idx) {
             return _vectors.GetRow(idx);
         };
+
+    protected:
+        OpenBabel::vector3 _position;
+        OpenBabel::matrix3x3 _vectors;
 };
 
 class OverlapIntegrationBox {
@@ -135,7 +136,7 @@ class OverlapIntegrationBox {
             };
             return total_overlap_counter * std::pow(_grid_size, 3);
         };
-    
+
     protected:
         struct Boundary {
             OpenBabel::vector3 min;
@@ -190,7 +191,7 @@ double vdwo(OpenBabel::OBMol receptor, OpenBabel::OBMol ligand,
             unsigned element = atom->GetAtomicNum();
             OpenBabel::vector3 test = atom->GetVector();
             auto position = atom->GetVector();
-            double radius = OB_elementTable.GetVdwRad(element);
+            double radius = obtable.GetVdwRad(element);
             overlap_integrator.add_sphere(group_id, position, radius);
         };
     };
