@@ -139,5 +139,5 @@ cython_debug/
 
 # SWIG specific
 vdwo.py
-vdwo-python__wrap.cpp
+vdwo-python_wrap.cpp
 
