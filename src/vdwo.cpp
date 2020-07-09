@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <numeric>
+#include <limits>
 #include <omp.h>
 #include <openbabel/mol.h>
 #include <openbabel/data.h>

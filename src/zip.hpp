@@ -1,6 +1,5 @@
 #pragma once
 
-#include <utility>
 #include "debug.hpp"
 
 template <template <typename, std::size_t> class V, std::size_t N, typename ...Ts>
